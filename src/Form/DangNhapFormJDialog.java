@@ -43,6 +43,7 @@ void init(){
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cboHienjMK = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,6 +82,8 @@ void init(){
             }
         });
 
+        jLabel5.setText("Quên mật khẩu");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,8 +103,11 @@ void init(){
                             .addComponent(txtname))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(cboHienjMK))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cboHienjMK)
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel5)))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +126,9 @@ void init(){
                             .addComponent(txtpas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
-                        .addComponent(cboHienjMK)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cboHienjMK)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
@@ -147,20 +155,75 @@ void init(){
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+     public void Login() {
+        String name = txtname.getText();
+        String pass = new String(txtpas.getText());
+        try {
+            TaiKhoan tk = daotk.selectById(name);
+
+            if (txtname.getText().equals("") || txtpas.getText().equals("")) {
+                JOptionPane.showMessageDialog(this,"Vui lòng điền đầy đủ thông tin!");
+                return;
+            } else if (txtname.getText().equals("")) {
+
+               JOptionPane.showMessageDialog(this,"Vui lòng điền tên tài khoản! ");
+                return;
+            } else if (txtpas.getText().equals("")) {
+
+                JOptionPane.showMessageDialog(this,"Vui lòng điền mật khẩu!");
+                return;
+            } else if (tk == null) {
+                JOptionPane.showMessageDialog(this,"Tài khoản không đúng!");
+                return;
+            } else if (!tk.getMatKhau().equalsIgnoreCase(pass)) {
+                JOptionPane.showMessageDialog(this,"Mật khẩu không đúng!");
+                return;
+            } else {
+                authenticated.use = tk;
+                JOptionPane.showMessageDialog(this, "Login thành công");
+                fLogin();
+                this.dispose();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void fLogin() {
+        Formchinhbanhang form = new Formchinhbanhang();
+        form.show();
+
+    }
     
+    public  void showpass(){
+      if (cboHienjMK.isSelected()) {
+            txtpas.setEchoChar((char) 0);
+
+        } else {
+            txtpas.setEchoChar('*');
+        }
+    }
+    
+    public void exit() {
+        int chon = JOptionPane.showConfirmDialog(this, "Bạn muốn hủy đăng nhập?", "", JOptionPane.YES_NO_OPTION);
+        if (chon == 0) {
+            System.exit(0);
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
+        Login();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
+        exit();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cboHienjMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboHienjMKActionPerformed
         // TODO add your handling code here:
-       
+        showpass();
     }//GEN-LAST:event_cboHienjMKActionPerformed
 
     /**
@@ -213,6 +276,7 @@ void init(){
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField txtname;
