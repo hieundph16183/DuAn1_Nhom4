@@ -10,42 +10,34 @@ package Model;
  * @author Hai
  */
 public class LoaiSanPham {
-    private String tenSanPham;
-    private String maLoaiSanPham;
-    private String moTa;
+   private String ID_LoaiSP;
+   private String tenLoaiSanPham;
 
     public LoaiSanPham() {
     }
 
-    public LoaiSanPham(String maLoaiSanPham, String tenSanPham, String moTa) {
-        this.maLoaiSanPham = maLoaiSanPham;
-        this.tenSanPham = tenSanPham;
-        this.moTa = moTa;
+    public LoaiSanPham(String ID_LoaiSP, String tenLoaiSanPham) {
+        this.ID_LoaiSP = ID_LoaiSP;
+        this.tenLoaiSanPham = tenLoaiSanPham;
     }
 
-    public String getTenSanPham() {
-        return tenSanPham;
+    public String getID_LoaiSP() {
+        return ID_LoaiSP;
     }
 
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public void setID_LoaiSP(String ID_LoaiSP) {
+        this.ID_LoaiSP = ID_LoaiSP;
     }
 
-    public String getMaLoaiSanPham() {
-        return maLoaiSanPham;
+    public String getTenLoaiSanPham() {
+        return tenLoaiSanPham;
     }
 
-    public void setMaLoaiSanPham(String maLoaiSanPham) {
-        this.maLoaiSanPham = maLoaiSanPham;
+    public void setTenLoaiSanPham(String tenLoaiSanPham) {
+        this.tenLoaiSanPham = tenLoaiSanPham;
     }
 
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
+    
         
     
 }

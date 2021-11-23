@@ -12,25 +12,23 @@ package Model;
 public class NhanVien {
     private String maNhanVien;
     private String tenNhanVien;
-    private boolean gioiTinh;
     private String soDT;
-    private String diaChi;
+    private String email;
     private String hinh;
-    private String matKhau;
-    private String vaiTro;
-
     public NhanVien() {
     }
 
-    public NhanVien(String maNhanVien, String tenNhanVien, boolean gioiTinh, String soDT, String diaChi, String hinh, String matKhau, String vaiTro) {
+    public NhanVien(String maNhanVien, String tenNhanVien, String soDT, String email, String hinh) {
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
-        this.gioiTinh = gioiTinh;
         this.soDT = soDT;
-        this.diaChi = diaChi;
+        this.email = email;
         this.hinh = hinh;
-        this.matKhau = matKhau;
-        this.vaiTro = vaiTro;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getMaNhanVien() {
@@ -49,14 +47,6 @@ public class NhanVien {
         this.tenNhanVien = tenNhanVien;
     }
 
-    public boolean isGioiTinh() {
-        return gioiTinh;
-    }
-
-    public void setGioiTinh(boolean gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-
     public String getSoDT() {
         return soDT;
     }
@@ -65,12 +55,12 @@ public class NhanVien {
         this.soDT = soDT;
     }
 
-    public String getDiaChi() {
-        return diaChi;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getHinh() {
@@ -81,21 +71,6 @@ public class NhanVien {
         this.hinh = hinh;
     }
 
-    public String getMatKhau() {
-        return matKhau;
-    }
-
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
-    }
-
-    public String getVaiTro() {
-        return vaiTro;
-    }
-
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
-    }
-    
+   
     
 }

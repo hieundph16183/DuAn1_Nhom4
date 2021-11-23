@@ -5,12 +5,13 @@
  */
 package Form;
 
-import Dao.NhanVienDAO;
-import Model.NhanVien;
+import Dao.TaiKhoanDAO;
+import Model.TaiKhoan;
+import helper.authenticated;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
 import helper.dialogHelper;
-import helper.shareHelper;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,7 @@ void init(){
         setLocationRelativeTo(null);
         init();
     }
-    NhanVienDAO dao=new NhanVienDAO(); 
+    TaiKhoanDAO daotk = new TaiKhoanDAO(); 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,11 +37,12 @@ void init(){
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtTen = new javax.swing.JTextField();
-        txtMatKhau = new javax.swing.JPasswordField();
+        txtname = new javax.swing.JTextField();
+        txtpas = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        cboHienjMK = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -72,6 +74,13 @@ void init(){
             }
         });
 
+        cboHienjMK.setText("Hiển thị mật khẩu");
+        cboHienjMK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboHienjMKActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -87,11 +96,12 @@ void init(){
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                            .addComponent(txtTen))
+                            .addComponent(txtpas, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                            .addComponent(txtname))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboHienjMK))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,13 +109,19 @@ void init(){
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(35, 35, 35)
+                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(35, 35, 35))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtpas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addComponent(cboHienjMK)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,7 +134,7 @@ void init(){
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -131,50 +147,21 @@ void init(){
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    void login() {
-        String manv = txtTen.getText();
-        String matKhau = new String(txtMatKhau.getPassword());
-        try {
-            NhanVien nhanVien = dao.findById(manv); 
-            if(nhanVien != null){    
-                String matKhau2 = nhanVien.getMatKhau();
-                if(matKhau.equals(matKhau2)){ 
-                    shareHelper.USER = nhanVien;
-                    dialogHelper.alert(this, "Đăng nhập thành công!");
-                    this.dispose();
-                }
-                else{
-                    dialogHelper.alert(this, "Sai mật khẩu!");
-                }
-            }
-            else{
-                dialogHelper.alert(this, "Sai tên đăng nhập!");
-            }
-        }
-        catch (Exception e) {
-            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
-        }
-    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        txtTen.setBackground(white);
-        txtMatKhau.setBackground(white);
-        if(txtTen.getText().trim().length()>0){
-            if(txtMatKhau.getPassword().length>0){
-                login();
-            }else{
-                txtMatKhau.setBackground(pink);
-                dialogHelper.alert(this, "Không được để trống tên mật khẩu");
-            }
-        }else{
-            txtTen.setBackground(pink);
-            dialogHelper.alert(this, "Không được để trống tên đăng nhập");
-        }
+       
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        System.exit(0);
+      
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void cboHienjMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboHienjMKActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_cboHienjMKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +206,7 @@ void init(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox cboHienjMK;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -227,7 +215,7 @@ void init(){
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPasswordField txtMatKhau;
-    private javax.swing.JTextField txtTen;
+    private javax.swing.JTextField txtname;
+    private javax.swing.JPasswordField txtpas;
     // End of variables declaration//GEN-END:variables
 }
