@@ -27,7 +27,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jLabel1" max="32767" attributes="0"/>
+          <Component id="jLabel1" pref="431" max="32767" attributes="0"/>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -72,14 +72,15 @@
                       <Component id="jButton1" min="-2" pref="223" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtMatKhau" pref="229" max="32767" attributes="0"/>
-                              <Component id="txtTen" max="32767" attributes="0"/>
+                              <Component id="txtpas" pref="229" max="32767" attributes="0"/>
+                              <Component id="txtname" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" pref="0" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="cboHienjMK" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="69" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,15 +90,24 @@
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtTen" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="txtname" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtMatKhau" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="txtpas" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="cboHienjMK" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jButton1" linkSize="2" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   <Component id="jButton2" linkSize="2" min="-2" pref="31" max="-2" attributes="0"/>
@@ -123,9 +133,9 @@
             <Property name="text" type="java.lang.String" value="M&#x1ead;t kh&#x1ea9;u:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtTen">
+        <Component class="javax.swing.JTextField" name="txtname">
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtMatKhau">
+        <Component class="javax.swing.JPasswordField" name="txtpas">
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
@@ -153,6 +163,14 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cboHienjMK">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Hi&#x1ec3;n th&#x1ecb; m&#x1ead;t kh&#x1ea9;u"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboHienjMKActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

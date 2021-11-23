@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Dao;
+package helper;
+
+import Model.TaiKhoan;
 
 /**
  *
- * @author 
+ * @author Hai
  */
-public class HoaDonChiTietDAO {
-    
+public class authenticated {
+    public static TaiKhoan use = null;
+
+    public static void clear() {
+        authenticated.use = null;
+
+    }
 }

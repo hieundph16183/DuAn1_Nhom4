@@ -11,19 +11,35 @@ import java.util.Date;
  * @author Hai
  */
 public class HoaDon {
+    private int STT;
     private String maHoaDon;
+    private String maSanPham;
+    private int soLuong;
+    private String maKhachHang;
     private Date thoiGianLap;
     private String maNhanVien;
-    private String maKhachHang;
+    private String tongTien;
 
     public HoaDon() {
     }
 
-    public HoaDon(String maHoaDon, Date thoiGianLap, String maNhanVien, String maKhachHang) {
+    public HoaDon(int STT, String maHoaDon, String maSanPham, int soLuong, String maKhachHang, Date thoiGianLap, String maNhanVien, String tongTien) {
+        this.STT = STT;
         this.maHoaDon = maHoaDon;
+        this.maSanPham = maSanPham;
+        this.soLuong = soLuong;
+        this.maKhachHang = maKhachHang;
         this.thoiGianLap = thoiGianLap;
         this.maNhanVien = maNhanVien;
-        this.maKhachHang = maKhachHang;
+        this.tongTien = tongTien;
+    }
+
+    public int getSTT() {
+        return STT;
+    }
+
+    public void setSTT(int STT) {
+        this.STT = STT;
     }
 
     public String getMaHoaDon() {
@@ -32,6 +48,30 @@ public class HoaDon {
 
     public void setMaHoaDon(String maHoaDon) {
         this.maHoaDon = maHoaDon;
+    }
+
+    public String getMaSanPham() {
+        return maSanPham;
+    }
+
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public String getMaKhachHang() {
+        return maKhachHang;
+    }
+
+    public void setMaKhachHang(String maKhachHang) {
+        this.maKhachHang = maKhachHang;
     }
 
     public Date getThoiGianLap() {
@@ -50,13 +90,15 @@ public class HoaDon {
         this.maNhanVien = maNhanVien;
     }
 
-    public String getMaKhachHang() {
-        return maKhachHang;
+    public String getTongTien() {
+        return tongTien;
     }
 
-    public void setMaKhachHang(String maKhachHang) {
-        this.maKhachHang = maKhachHang;
+    public void setTongTien(String tongTien) {
+        this.tongTien = tongTien;
     }
+
+    
     
     
             

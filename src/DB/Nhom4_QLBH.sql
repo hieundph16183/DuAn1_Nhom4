@@ -19,11 +19,18 @@ create table NhanVien
 	TenNV nvarchar(40),
 	Sdt varchar(13),
 	DiaChi nvarchar(150),
-	GioiTinh bit,
-	MatKhau	nvarchar(20),
-	VaiTro	nvarchar(20),
+	email nvarchar(150),
 	Hinh nvarchar(150),
 	primary key(MaNV)	
+)
+go
+
+create table TaiKhoan(
+	TenTaiKhoan varchar(20) not null primary key,
+	MatKhau nvarchar(30),
+	VaiTro nvarchar(25) ,
+	MaNV varchar(10),
+	foreign key (MaNV) references NhanVien (MaNV)
 )
 go
 
@@ -35,104 +42,95 @@ create table KhachHang
 	DiaChi nvarchar(150),
 	primary key(MaKH)	
 )
-
+	
 
 create table LoaiSanPham
 (
-	MaLoaiSanPham varchar(10) not null,
-	TenSanPham nvarchar (50),
-	MoTa nvarchar (150),
-	primary key (MaLoaiSanPham)
+	ID_LoaiSP varchar(10),
+	TenLoaiSanPham nvarchar (50),
+	primary key (ID_LoaiSP)
 )
 go
 
 create table SanPham
 (
 	MaSanPham varchar(10) not null,
-	MaLoaiSanPham varchar(10),
-	TenSanPham nvarchar (50),
-	Hinh nvarchar (150),
+	TenSanPham varchar(150),
 	GiaSanPham float,
-	primary key (MaSanPham)
+	Hinh nvarchar (150),
+	ID_LoaiSP varchar(10),
+	primary key (MaSanPham),
+	foreign key (ID_LoaiSP) references LoaiSanPham(ID_LoaiSP)
 )
 go
 
-
-	
 create table HoaDon
 (
-	MaHD varchar(10) not null,
-	ThoiGianLap datetime,
-	MaNV varchar(10),
-	MaKH varchar(10),
-	primary key (MaHD)
-)
-go
-
-create table ChiTietHD
-(
+	STT int not null identity(1,1),
 	MaHD varchar(10) not null,
 	MaSanPham varchar(10),
-	TenSanPham nvarchar(50),
-	SoLuong int,
+	SoLuong int,  
+	MaKH varchar(10),
+	ThoiGianLap datetime,
+	MaNV varchar(10),
 	TongTien float,
-	GiamGia float,
-	primary key (MaHD)
+	primary key (STT),
+	foreign key (MaKH)  references KhachHang(MaKH),
+	foreign key (MaNV)  references NhanVien(MaNV),
 )
 go
 
 
 
-alter table SanPham
-	add constraint fk_SanPham_LoaiSanPham foreign key (MaLoaiSanPham) references LoaiSanPham (MaLoaiSanPham)
-
-alter table HoaDon
-	add constraint fk_HoaDon_NhanVien foreign key (MaNV) references NhanVien (MaNV),
-	constraint fk_HoaDon_KhachHang foreign key (MaKH) references KhachHang (MaKH)
-
-alter table ChiTietHD
-	add constraint fk_ChiTietHD_HoaDon foreign key (MaHD) references  HoaDon(MaHD),
-	constraint fk_ChiTietHD_SanPham foreign key (MaSanPham) references SanPham(MaSanPham)
 
 
 
-insert into NhanVien values('NV01',N'Nguyễn Huy Hiếu',N'0432434342',N'Hà Nội',1,'123456','Nhân Viên',null)
-insert into NhanVien values('NV02',N'Nguyễn Huy Nam',N'0998745442',N'Hải Phòng',1,'123456','Nhân Viên',null)
-insert into NhanVien values('NV03',N'Nguyễn Thị Hương',N'0353534442',N'Hà Nam',0,'123456','Nhân Viên',null)
-insert into NhanVien values('NV04',N'Vũ Thị Huyền',N'0756434368',N'Hải Dương',0,'123456','Quản Lý',null)
-insert into NhanVien values('NV05',N'Nguyễn Huy Hoàng',N'0454927343',N'Hà Nội',1,'123456','Quản Lý',null)
+
+
+insert into NhanVien values('NV01',N'Nguyễn Huy Hiếu',N'0432434342',N'Hà Nội','hieuha12@gamil.com',null)
+insert into NhanVien values('NV02',N'Nguyễn Huy Nam',N'0998745442',N'Hải Phòng','hieuha12@gamil.com',null)
+insert into NhanVien values('NV03',N'Nguyễn Thị Hương',N'0353534442',N'Hà Nam','hieuha12@gamil.com',null)
+insert into NhanVien values('NV04',N'Vũ Thị Huyền',N'0756434368',N'Hải Dương','hieuha12@gamil.com',null)
+insert into NhanVien values('NV05',N'Nguyễn Huy Hoàng',N'0454927343',N'Hà Nội','hieuha12@gamil.com',null)
+
+insert into TaiKhoan values('hieund1','123456',N'NhanVien','NV01')
+insert into TaiKhoan values('hieund2','123456',N'NhanVien','NV02')
+insert into TaiKhoan values('hieund3','123456',N'NhanVien','NV03')
+insert into TaiKhoan values('hieund4','123456',N'NhanVien','NV04')
+insert into TaiKhoan values('hieund5','123456',N'QuanLy','NV05')
 
 insert into KhachHang values('KH01',N'Nguyễn Văn Nam',N'035476555',N'Hà Nội')
 insert into KhachHang values('KH02',N'Kiều Văn Hoàng',N'093453434',N'Hà Nội')
 insert into KhachHang values('KH03',N'Nguyễn Thị Hoa',N'095453543',N'Hà Nội')
 insert into KhachHang values('KH04',N'Vũ Văn Nam',N'0954555453',N'Hà Nội')
 
-insert into HoaDon values('HD01','10-10-2021','NV01','KH01')
-insert into HoaDon values('HD02','11-10-2021','NV02','KH02')
-insert into HoaDon values('HD03','12-10-2021','NV01','KH03')
-insert into HoaDon values('HD04','10-10-2021','NV03','KH04')
+insert into LoaiSanPham values('TC1',N'Trà Chanh')
+insert into LoaiSanPham values('TS2',N'Trà Sữa')
+insert into LoaiSanPham values('TS3',N'Cà Phê')
+insert into LoaiSanPham values('TS4',N'Nước Ngọt')
 
-insert into LoaiSanPham values(N'SP1','Trà sữa chân châu',N'Nhiều chân châu')
-insert into LoaiSanPham values(N'SP2','Trà sữa chân châu đường đen',N'Nhiều chân châu và đường')
-insert into LoaiSanPham values(N'SP3','Trà sữa nha đam',N'Nhiều nha đam')
-insert into LoaiSanPham values(N'SP4','Cà phê sữa',N'Nhiều sữa ít cà phê')
-insert into LoaiSanPham values(N'SP5','Cà phê đen',N'Very good')
+insert into SanPham values('SP1',N'Trà Chanh Nha Đam',10000,null,'TC1')
+insert into SanPham values('SP2',N'Trà Chanh Thường',10000,null,'TC1')
+insert into SanPham values('SP3',N'Trà Chanh Nho',20000,null,'TS1')
+insert into SanPham values('SP4',N'Trà sữa chân châu',50000,null,'TS2')
+insert into SanPham values('SP5',N'Trà sữa nha dam',50000,null,'TS2')
+insert into SanPham values('SP6',N'Cà phê den',20000,null,'TS3')
+insert into SanPham values('SP7',N'Cà Phê đá',20000,null,'TS3')
+insert into SanPham values('SP8',N'Coca',10000,null,'TS4')
+insert into SanPham values('SP9',N'Pepsi',10000,null,'TS4')
 
-insert into SanPham values('SP01',N'SP1',N'Trà sữa chân châu',null,50000.0)
-insert into SanPham values('SP02',N'SP2 ',N'Trà sữa chân châu đường đen',null,750000.0)
-insert into SanPham values('SP03',N'SP3',N'Trà sữa nha đam',null,50000.0)
-insert into SanPham values('SP04',N'SP4',N'Cà phê sữa ',null,100000.0)
-insert into SanPham values('SP05',N'SP5',N'Cà phê đen',null,500000.0)
 
-insert into ChiTietHD values('HD01','SP01',N'Trà sữa chân châu',5,'250000.0','2.0')
-insert into ChiTietHD values('HD02','SP02',N'Trà sữa chân châu',4,'250000.0','2.0')
-insert into ChiTietHD values('HD03','SP04',N'Cà phê sữa',3,'400000.0','2.0')
-insert into ChiTietHD values('HD04','SP01',N'Trà sữa chân châu',5,'250000.0','2.0')
+insert into HoaDon values('HD01','SP1',5,'KH01','10-10-2021','NV01',50000.0)
+insert into HoaDon values('HD02','SP2',4,'KH02','11-10-2021','NV02',40000.0)
+insert into HoaDon values('HD03','SP3',3,'KH03','12-10-2021','NV03',60000.0)
+
+
+
 
 select * from NhanVien
+select  * from TaiKhoan
 select * from SanPham
-select * from ChiTietHD
 select * from KhachHang
-select * from HoaDon
 select * from LoaiSanPham
+select * from HoaDon
 

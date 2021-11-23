@@ -11,20 +11,20 @@ package Model;
  */
 public class SanPham {
     private String maSanPham;
-    private String maLoaiSanPham;
     private String tenSanPham;
     private double giaSanPham;
-    private String hinhSanPham;
+    private String Hinh;
+    private String ID_LoaiSP;
 
     public SanPham() {
     }
 
-    public SanPham(String maSanPham, String maLoaiSanPham, String tenSanPham, double giaSanPham, String hinhSanPham) {
+    public SanPham(String maSanPham, String tenSanPham, double giaSanPham, String Hinh, String ID_LoaiSP) {
         this.maSanPham = maSanPham;
-        this.maLoaiSanPham = maLoaiSanPham;
         this.tenSanPham = tenSanPham;
         this.giaSanPham = giaSanPham;
-        this.hinhSanPham = hinhSanPham;
+        this.Hinh = Hinh;
+        this.ID_LoaiSP = ID_LoaiSP;
     }
 
     public String getMaSanPham() {
@@ -33,14 +33,6 @@ public class SanPham {
 
     public void setMaSanPham(String maSanPham) {
         this.maSanPham = maSanPham;
-    }
-
-    public String getMaLoaiSanPham() {
-        return maLoaiSanPham;
-    }
-
-    public void setMaLoaiSanPham(String maLoaiSanPham) {
-        this.maLoaiSanPham = maLoaiSanPham;
     }
 
     public String getTenSanPham() {
@@ -59,13 +51,21 @@ public class SanPham {
         this.giaSanPham = giaSanPham;
     }
 
-    public String getHinhSanPham() {
-        return hinhSanPham;
+    public String getHinh() {
+        return Hinh;
     }
 
-    public void setHinhSanPham(String hinhSanPham) {
-        this.hinhSanPham = hinhSanPham;
+    public void setHinh(String Hinh) {
+        this.Hinh = Hinh;
     }
-    
-    
+
+    public String getID_LoaiSP() {
+        return ID_LoaiSP;
+    }
+
+    public void setID_LoaiSP(String ID_LoaiSP) {
+        this.ID_LoaiSP = ID_LoaiSP;
+    }
+
+   
 }
