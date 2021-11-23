@@ -5,20 +5,47 @@
  */
 package Form;
 
+import Dao.HoaDonDAO;
+import helper.dialogHelper;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import Model.HoaDon;
+import javax.swing.JFileChooser;
 /**
  *
  * @author TRAN DUC TUNG
  */
-public class HoaDon extends javax.swing.JDialog {
-
-    /**
+public class HoaDonBanHang extends javax.swing.JDialog {
+     int index = 0;  
+    HoaDonDAO dao = new HoaDonDAO();     
+     JFileChooser fileChooser = new JFileChooser();
+    /** 
      * Creates new form InHoaDonFormDialog
      */
-    public HoaDon(java.awt.Frame parent, boolean modal) {
+    public HoaDonBanHang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
+    
 
+void load() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            List<HoaDon> list = dao.select();
+            for (HoaDon hd : list) {
+                Object[] row = {
+                    hd.getMaHoaDon(),
+                    hd.getThoiGianLap(),
+                    hd.getMaNhanVien(),
+                    hd.getMaKhachHang()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -255,14 +282,7 @@ public class HoaDon extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HoaDon dialog = new HoaDon(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+               
             }
         });
     }
