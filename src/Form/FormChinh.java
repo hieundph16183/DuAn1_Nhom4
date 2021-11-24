@@ -9,12 +9,12 @@ package Form;
  *
  * @author TRAN DUC TUNG
  */
-public class Formchinhbanhang extends javax.swing.JFrame {
+public class FormChinh extends javax.swing.JFrame {
 
     /**
      * Creates new form Formchinhbanhang
      */
-    public Formchinhbanhang() {
+    public FormChinh() {
         initComponents();
     }
 
@@ -67,7 +67,7 @@ public class Formchinhbanhang extends javax.swing.JFrame {
 
         jButton6.setBackground(new java.awt.Color(0, 153, 153));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Cash register.png"))); // NOI18N
-        jButton6.setText("IN HÓA ĐƠN");
+        jButton6.setText("HÓA ĐƠN");
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -232,20 +232,21 @@ public class Formchinhbanhang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Formchinhbanhang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormChinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Formchinhbanhang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormChinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Formchinhbanhang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormChinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Formchinhbanhang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormChinh.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Formchinhbanhang().setVisible(true);
+                new FormChinh().setVisible(true);
             }
         });
     }
