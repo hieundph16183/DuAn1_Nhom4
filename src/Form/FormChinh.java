@@ -31,7 +31,15 @@ public class FormChinh extends javax.swing.JFrame {
     }
     
     void init(){
+       new Timer(1000, new ActionListener() {
+            SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss a");
+
+            public void actionPerformed(ActionEvent e) {
+                lbldongho.setText(format.format(new Date()));
+            }
+        }).start();
         openLogin(); // gọi dangNhapJDialog
+        
     }
     
     
@@ -40,8 +48,14 @@ public class FormChinh extends javax.swing.JFrame {
     }
     
     void logoff() {
-        Auth.clear();
-        this.openLogin();
+       if (Auth.isLogin()) {
+           Auth.clear();
+            dialogHelper.alert(this, "Đã đăng xuất!");
+      
+         
+        } else {
+            dialogHelper.alert(this, "Bạn chưa đăng nhập!");
+        }
         
     }
     
@@ -59,8 +73,12 @@ public class FormChinh extends javax.swing.JFrame {
     FormGDQLNhanVien frmnhanVien = new FormGDQLNhanVien();
     public void openQLNhanVien() {
         if (Auth.isLogin()) {
+            if(frmnhanVien==null){
             frmnhanVien.setVisible(true);
-           
+            }else{
+                 frmnhanVien.dispose();
+               frmnhanVien.setVisible(true);
+            }
         } else {
             dialogHelper.alert(this, "Vui lòng đăng nhập!");
         }
@@ -115,7 +133,7 @@ public class FormChinh extends javax.swing.JFrame {
         lbl_dongHo = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel1 = new javax.swing.JLabel();
+        lbldongho = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
         btn_NhanVien = new javax.swing.JButton();
         btn_SanPham = new javax.swing.JButton();
@@ -160,9 +178,9 @@ public class FormChinh extends javax.swing.JFrame {
             .addGap(0, 332, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("10:50 PM");
+        lbldongho.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lbldongho.setForeground(new java.awt.Color(255, 255, 255));
+        lbldongho.setText("10:50 PM");
 
         btn_logout.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_logout.setText("Đăng Xuất");
@@ -241,7 +259,7 @@ public class FormChinh extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lbldongho)
                 .addGap(23, 23, 23))
             .addGroup(lbl_dongHoLayout.createSequentialGroup()
                 .addGroup(lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,7 +302,7 @@ public class FormChinh extends javax.swing.JFrame {
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbldongho, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_logout))
                 .addContainerGap())
         );
@@ -367,7 +385,6 @@ public class FormChinh extends javax.swing.JFrame {
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
         logoff();
-        this.dispose();
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
@@ -433,7 +450,6 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JButton btn_loaiSanPham;
     private javax.swing.JButton btn_logout;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -444,5 +460,6 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JPanel lbl_dongHo;
+    private javax.swing.JLabel lbldongho;
     // End of variables declaration//GEN-END:variables
 }

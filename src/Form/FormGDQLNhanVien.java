@@ -231,11 +231,11 @@ public class FormGDQLNhanVien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã nhân viên", "Tên nhân viên", "Mật Khẩu", "Địa chỉ", "Giới Tính", "Số dt", "Vai Trò", "Hình"
+                "Mã nhân viên", "Tên nhân viên", "Địa chỉ", "Số dt", "Email", "Hình"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true, true
+                false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
