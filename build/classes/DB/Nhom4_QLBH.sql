@@ -91,7 +91,7 @@ insert into NhanVien values('NV01',N'Nguyễn Huy Hiếu',N'0432434342',N'Hà N�
 insert into NhanVien values('NV02',N'Nguyễn Huy Nam',N'0998745442',N'Hải Phòng','hieuha12@gamil.com',null)
 insert into NhanVien values('NV03',N'Nguyễn Thị Hương',N'0353534442',N'Hà Nam','hieuha12@gamil.com',null)
 insert into NhanVien values('NV04',N'Vũ Thị Huyền',N'0756434368',N'Hải Dương','hieuha12@gamil.com',null)
-insert into NhanVien values('NV04',N'Nguyễn Huy Hoàng',N'0454927343',N'Hà Nội','hieuha12@gamil.com',null)
+insert into NhanVien values('NV05',N'Nguyễn Huy Hoàng',N'0454927343',N'Hà Nội','hieuha12@gamil.com',null)
 
 insert into TaiKhoan values('NV01',N'Nguyễn Huy Hiếu','123456',0)
 insert into TaiKhoan values('NV02',N'Nguyễn Huy Nam','123456',0)
@@ -123,6 +123,7 @@ insert into SanPham values('SP9',N'Pepsi',10000,null,'TS4')
 insert into HoaDon values('HD01','SP1',5,'KH01','10-10-2021','NV01',50000.0)
 insert into HoaDon values('HD02','SP2',4,'KH02','11-10-2021','NV02',40000.0)
 insert into HoaDon values('HD03','SP3',3,'KH03','12-10-2021','NV03',60000.0)
+insert into HoaDon values('HD04','SP4',4,'KH04','12-10-2021','NV05',80000)
 
 
 
@@ -133,4 +134,5 @@ select * from SanPham
 select * from KhachHang
 select * from LoaiSanPham
 select * from HoaDon
+
 
