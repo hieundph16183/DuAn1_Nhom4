@@ -7,7 +7,7 @@ package Form;
 
 import Dao.TaiKhoanDAO;
 import Model.TaiKhoan;
-import helper.authenticated;
+import helper.Auth;
 import static java.awt.Color.pink;
 import static java.awt.Color.white;
 import helper.dialogHelper;
@@ -28,6 +28,53 @@ void init(){
         init();
     }
     TaiKhoanDAO daotk = new TaiKhoanDAO(); 
+    
+    public void Login() {
+        String name = txtname.getText();
+        String pass = new String(txtpas.getText());
+        try {
+            TaiKhoan tk = daotk.findById(name);
+
+            if(tk != null){    //nếu manv đúng
+                String matKhau2 = tk.getMatKhau();
+                if(pass.equals(matKhau2)){  //nếu mật khẩu đúng
+                    Auth.user = tk;
+                    dialogHelper.alert(this, "Đăng nhập thành công!");
+                    this.dispose();
+                }
+                else{
+                    dialogHelper.alert(this, "Sai mật khẩu!");
+                }
+            }
+            else{
+                dialogHelper.alert(this, "Sai tên đăng nhập!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void LoginQL() {
+        FormChinh form = new FormChinh();
+        form.show();
+
+    }
+
+    public  void showpass(){
+      if (cboHienjMK.isSelected()) {
+            txtpas.setEchoChar((char) 0);
+
+        } else {
+            txtpas.setEchoChar('*');
+        }
+    }
+
+    public void exit() {
+        int chon = JOptionPane.showConfirmDialog(this, "Bạn muốn hủy đăng nhập?", "", JOptionPane.YES_NO_OPTION);
+        if (chon == 0) {
+            System.exit(0);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -150,17 +197,17 @@ void init(){
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       
+       Login();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
+      exit();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void cboHienjMKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboHienjMKActionPerformed
         // TODO add your handling code here:
-       
+       showpass();
     }//GEN-LAST:event_cboHienjMKActionPerformed
 
     /**

@@ -10,54 +10,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import helper.jdbcHelper;
+import java.util.List;
 
 /**
  *
  * @author Hai
  */
 public class TaiKhoanDAO {
-     String INSERT = "INSERT INTO TaiKhoan (TenTaiKhoan,MatKhau,VaiTro,MaNV) VALUES (?,?,?,?)";
-    String UPDATE = "UPDATE TaiKhoan SET MatKhau=?,VaiTro=?,MaNV=? WHERE TenTaiKhoan=?";
-    String SELECT_BY_ID = "SELECT*FROM TaiKhoan WHERE TenTaiKhoan=?";
+    public TaiKhoan readFromResultSet(ResultSet rs) throws SQLException{
+        TaiKhoan model=new TaiKhoan();
+        model.setMaNV(rs.getString("MaNV"));
+        model.setMatKhau(rs.getString("MatKhau"));
+        model.setTenTaiKhoan(rs.getString("TenTaiKhoan"));
+        model.setVaiTro(rs.getBoolean("VaiTro"));
+        return model;
+    }
     
-    public void insert(TaiKhoan tk) {
-        helper.jdbcHelper.executeUpdate(INSERT, tk.getTenTaiKhoan(), tk.getMatKhau(), tk.getVaiTro(), tk.getMaNV());
-
-    }
-
-    public void update(TaiKhoan tk) {
-        helper.jdbcHelper.executeUpdate(UPDATE, tk.getMatKhau(), tk.getVaiTro(),tk.getMaNV(), tk.getTenTaiKhoan());
-    }
-
-    public void delete(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void doiMK(TaiKhoan nv) {
-        String UPDATE = "UPDATE Tai_Khoan SET MatKhau =? WHERE TenTaiKhoan=?";
+    //thực hiện truy vấn lấy về 1 tập ResultSet rồi điền tập ResultSet đó vào 1 List
+    public List<TaiKhoan> select(String sql,Object...args){
+        List<TaiKhoan> list=new ArrayList<>();
         try {
-           jdbcHelper.executeUpdate(UPDATE, nv.getMatKhau(), nv.getTenTaiKhoan());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-    public ArrayList<TaiKhoan> selectALL() {
-        String SELECT = "SELECT * FROM TaiKhoan";
-        return this.selectBySql(SELECT);
-    }
-
-    public ArrayList<TaiKhoan> selectFrom(String sql, Object... args) {
-        ArrayList<TaiKhoan> list = new ArrayList<>();
-        try {
-            ResultSet rs = null;
-            try {
-                rs = jdbcHelper.executeQuery(sql, args);
-                while (rs.next()) {
+            ResultSet rs=null;
+            try{
+                rs=jdbcHelper.executeQuery(sql, args);
+                while(rs.next()){
                     list.add(readFromResultSet(rs));
                 }
-            } finally {
+            }finally{
                 rs.getStatement().getConnection().close();      //đóng kết nối từ resultSet
             }
         } catch (SQLException ex) {
@@ -65,40 +44,59 @@ public class TaiKhoanDAO {
         }
         return list;
     }
-
-    public TaiKhoan selectById(String key) {
-        ArrayList<TaiKhoan> list = selectBySql(SELECT_BY_ID, key);
-        if(list.isEmpty()){
-            return null;
-        }
-        return list.get(0);
+    
+    /*
+     * Thêm mới thực thể vào CSDL
+     * @param entity là thực thể chứa thông tin bản ghi mới
+     */
+    public void insert(TaiKhoan entity) {
+        String sql="INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau, VaiTro,MaNV) VALUES (?, ?, ?, ?)";
+        jdbcHelper.executeUpdate(sql,
+                entity.getTenTaiKhoan(),
+                entity.getMatKhau(),
+                entity.isVaiTro(),
+                entity.getMaNV());
     }
 
-    protected ArrayList<TaiKhoan> selectBySql(String sql, Object... args) {
-
-        ArrayList<TaiKhoan> list = new ArrayList<>();
-        try {
-            ResultSet rs = jdbcHelper.executeQuery(sql, args);
-            while (rs.next()) {
-                TaiKhoan tk = new TaiKhoan();
-                tk.setTenTaiKhoan(rs.getString("TenTaiKhoan"));
-                tk.setMatKhau(rs.getString("MatKhau"));
-                tk.setMaNV(rs.getString("MaNV"));
-                list.add(tk);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-
+    /*
+     * Cập nhật thực thể vào CSDL
+     * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
+     */
+    public void update(TaiKhoan entity) {
+        String sql="UPDATE NhanVien SET MaNV=?, MatKhau=?, VaiTro= ? MaNV WHERE TenTaiKhoan=?";
+        jdbcHelper.executeUpdate(sql,
+                entity.getMaNV(),
+                entity.getMatKhau(),
+                entity.isVaiTro(),
+                entity.getTenTaiKhoan());
     }
 
-    private TaiKhoan readFromResultSet(ResultSet rs) throws SQLException {
-        TaiKhoan model = new TaiKhoan();
-        model.setTenTaiKhoan(rs.getString("TenTaiKhoan"));
-        model.setMatKhau(rs.getString("MatKhau"));
-        model.setVaiTro(rs.getString("VaiTro"));
-         model.setMaNV(rs.getString("MaNV"));
-        return model;
+    /*
+     * Xóa bản ghi khỏi CSDL
+     * @param maNV là mã của bản ghi cần xóa
+     */
+    public void delete(String maNV) {
+        String sql="DELETE FROM TaiKhoan WHERE MaNV=?";
+        jdbcHelper.executeUpdate(sql, maNV);
+    }
+
+    /**
+     * Truy vấn tất cả các các thực thể
+     * @return danh sách các thực thể
+     */
+    public List<TaiKhoan> select() {
+        String sql="SELECT * FROM TaiKhoan";
+        return select(sql);             //trong 1 class có thể có 2 method trùng tên (nhưng param khác nhau)
+    }
+
+    /*
+     * Truy vấn thực thể theo mã id
+     * @param id là mã của bản ghi được truy vấn
+     * @return thực thể chứa thông tin của bản ghi
+     */
+    public TaiKhoan findById(String id) {
+        String sql="SELECT * FROM TaiKhoan WHERE TenTaiKhoan=?";
+        List<TaiKhoan> list=select(sql, id);
+        return list.size()>0?list.get(0):null;               //có thể trả về là null
     }
 }

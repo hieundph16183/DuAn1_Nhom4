@@ -5,21 +5,55 @@
  */
 package Form;
 
+import helper.dialogHelper;
+import java.awt.Color;
+import Model.TaiKhoan;
+import Dao.TaiKhoanDAO;
+import helper.Auth;
+import Validate.Validate;
+import helper.MsgBox;
+import Validate.Validate;
 /**
  *
  * @author 
  */
 public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
-void init(){
-    setTitle("HỆ THỐNG QUẢN LÝ BÁN HÀNG");
-}
+
     public DoiMatKhauFormJDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         init();
     }
+    public void init(){
+      
+    
+    }
+    TaiKhoanDAO dao = new TaiKhoanDAO();
+    
+    private void doiMK(){
+        String maNV = txtMaNV.getText();
+        String matKhau=new String(txtMatKhau.getPassword());
+        String matKhauMoi=new String(txtMatKhauMoi.getPassword());
+        String xacNhanMKM=new String(txtXacNhanMKM.getPassword());
+        
+        if(!maNV.equalsIgnoreCase(Auth.user.getTenTaiKhoan())){
+            MsgBox.alert(this, "Sai teen dang nhap");
+        }else if(!matKhau.equals(Auth.user.getMatKhau())){
+             MsgBox.alert(this, "Sai mat khau ");
+        }else if(!matKhauMoi.equals(xacNhanMKM)){
+             MsgBox.alert(this, "Xac nhan mk chua dung");
+        }else{
+            Auth.user.setMatKhau(matKhauMoi);
+            dao.update(Auth.user);
+             MsgBox.alert(this, "Doi mk thanh cong");
+        }
+        
+    }
 
+       private void huybo(){
+           this.dispose();
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,12 +67,12 @@ void init(){
         jLabel3 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtPassOld = new javax.swing.JPasswordField();
-        txtPassOld1 = new javax.swing.JPasswordField();
-        txtPassOld3 = new javax.swing.JPasswordField();
+        txtMatKhauMoi = new javax.swing.JPasswordField();
+        txtMatKhau = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
-        txtPassOld2 = new javax.swing.JPasswordField();
+        txtXacNhanMKM = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
+        txtMaNV = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -55,16 +89,14 @@ void init(){
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Nhập mật khẩu cũ: ");
 
-        txtPassOld.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMatKhauMoi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtPassOld1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        txtPassOld3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMatKhau.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Nhập mật khẩu mới: ");
 
-        txtPassOld2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtXacNhanMKM.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Xác nhận mật khẩu: ");
@@ -80,22 +112,22 @@ void init(){
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPassOld2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtXacNhanMKM, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(117, 117, 117))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtPassOld, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtPassOld3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPassOld1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                    .addComponent(txtMaNV))))
                         .addGap(118, 118, 118))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -103,32 +135,42 @@ void init(){
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassOld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPassOld3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPassOld2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtXacNhanMKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPassOld1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMatKhauMoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addGap(61, 61, 61))))
         );
 
         jButton1.setBackground(new java.awt.Color(51, 102, 255));
         jButton1.setText("Xác Nhận");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Hủy");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,6 +208,22 @@ void init(){
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(Validate.checkNullPass(txtMatKhau)&&
+                Validate.checkNullPass(txtMatKhauMoi)&&
+                Validate.checkNullPass(txtXacNhanMKM)){
+             doiMK();
+        }
+       
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+       huybo();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,9 +277,9 @@ void init(){
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JPasswordField txtPassOld;
-    private javax.swing.JPasswordField txtPassOld1;
-    private javax.swing.JPasswordField txtPassOld2;
-    private javax.swing.JPasswordField txtPassOld3;
+    private javax.swing.JTextField txtMaNV;
+    private javax.swing.JPasswordField txtMatKhau;
+    private javax.swing.JPasswordField txtMatKhauMoi;
+    private javax.swing.JPasswordField txtXacNhanMKM;
     // End of variables declaration//GEN-END:variables
 }

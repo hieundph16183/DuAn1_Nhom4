@@ -12,14 +12,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
-import Model.NhanVien;
+import Model.TaiKhoan;
 
 /**
  *
  * @author Sieu Nhan Bay
  */
 public class shareHelper {
- /**
+ /*
  * Ảnh biểu tượng của ứng dụng, xuất hiện trên mọi cửa sổ
  */
  public static final Image APP_ICON;
@@ -69,7 +69,7 @@ public class shareHelper {
  /**
  * Đối tượng này chứa thông tin người sử dụng sau khi đăng nhnập
  */
- public static NhanVien USER = null;
+ public static TaiKhoan USER = null;
  /**
  * Xóa thông tin của người sử dụng khi có yêu cầu đăng xuất
  */

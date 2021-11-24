@@ -16,6 +16,7 @@ public class FormGDQLNhanVien extends javax.swing.JFrame {
      */
     public FormGDQLNhanVien() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -5,6 +5,17 @@
  */
 package Form;
 
+import helper.dialogHelper;
+import helper.Auth;
+import helper.shareHelper;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JInternalFrame;
+import javax.swing.Timer;
+
+
 /**
  *
  * @author TRAN DUC TUNG
@@ -16,8 +27,81 @@ public class FormChinh extends javax.swing.JFrame {
      */
     public FormChinh() {
         initComponents();
+        init();
     }
+    
+    void init(){
+        openLogin(); // gọi dangNhapJDialog
+    }
+    
+    
+    public void openLogin() {
+        new DangNhapFormJDialog(this, true).setVisible(true);
+    }
+    
+    void logoff() {
+        Auth.clear();
+        this.openLogin();
+        
+    }
+    
+   
+    
+    FormDoanhThu frmdoanhthu = new FormDoanhThu();
+    public void openDoanhThu() {
+        if (Auth.isLogin()) {
+            frmdoanhthu.setVisible(true);
+        } else {
+            dialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    
+    FormGDQLNhanVien frmnhanVien = new FormGDQLNhanVien();
+    public void openQLNhanVien() {
+        if (Auth.isLogin()) {
+            frmnhanVien.setVisible(true);
+           
+        } else {
+            dialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    
+    FormHoaDon frmhoaDon = new FormHoaDon();
+    public void openHoaDon() {
+        if (Auth.isLogin()) {
+            frmhoaDon.setVisible(true);
+          
+        } else {
+            dialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    
+    FormSanPham frmSp = new FormSanPham();
+    public void openSanPham(){
+        if(Auth.isLogin()){
+            frmSp.setVisible(true);
+        }else{
+            dialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    
+  
+  
+    public void openLoaiSanPham() {
+        if (Auth.isLogin()) {
+            FormLoaiSanPham frmloaiSP = new FormLoaiSanPham();
+            frmloaiSP.setVisible(true);
+           
+        } else {
+            dialogHelper.alert(this, "Vui lòng đăng nhập!");
+        }
+    }
+    void exit() {
 
+        if (dialogHelper.confirm(this, "Bạn thực sự muốn kết thúc?")) {
+            System.exit(0);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,193 +111,283 @@ public class FormChinh extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        jButton6 = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
-        jSeparator5 = new javax.swing.JToolBar.Separator();
-        jButton7 = new javax.swing.JButton();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        lbl_dongHo = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
+        btn_NhanVien = new javax.swing.JButton();
+        btn_SanPham = new javax.swing.JButton();
+        btn_loaiSanPham = new javax.swing.JButton();
+        btn_HoaDon = new javax.swing.JButton();
+        btn_doanhThu1 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-
-        jToolBar1.setBackground(new java.awt.Color(0, 153, 153));
-        jToolBar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jToolBar1.setRollover(true);
-
-        jButton1.setBackground(new java.awt.Color(0, 153, 153));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Calculator.png"))); // NOI18N
-        jButton1.setText("BÁN HÀNG");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
-        jToolBar1.add(jSeparator2);
-
-        jButton6.setBackground(new java.awt.Color(0, 153, 153));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Cash register.png"))); // NOI18N
-        jButton6.setText("HÓA ĐƠN");
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton6);
-        jToolBar1.add(jSeparator1);
-
-        jButton3.setBackground(new java.awt.Color(0, 153, 153));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Clien list.png"))); // NOI18N
-        jButton3.setText("QUẢN LÝ NHÂN VIÊN");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
-        jToolBar1.add(jSeparator4);
-
-        jButton4.setBackground(new java.awt.Color(0, 153, 153));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Full basket.png"))); // NOI18N
-        jButton4.setText("QUẢN LÝ HÀNG HÓA");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
-        jToolBar1.add(jSeparator5);
-
-        jButton7.setBackground(new java.awt.Color(0, 153, 153));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Diagram.png"))); // NOI18N
-        jButton7.setText("DOANH THU");
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton7);
+        lbl_dongHo.setBackground(new java.awt.Color(204, 204, 204));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("nv01-Tung");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Unknown person.png"))); // NOI18N
-
-        jButton5.setBackground(new java.awt.Color(204, 0, 204));
-        jButton5.setText("Đổi mật khẩu");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2))
+            .addGap(0, 131, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 9, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1))
+            .addGap(0, 53, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 332, Short.MAX_VALUE)
+        );
 
-        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("10:50 PM");
 
-        jLabel3.setText("00:00");
+        btn_logout.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_logout.setText("Đăng Xuất");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_logoutActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setText("../../....");
+        btn_NhanVien.setBackground(new java.awt.Color(0, 153, 153));
+        btn_NhanVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Clien list.png"))); // NOI18N
+        btn_NhanVien.setText("QUẢN LÝ NHÂN VIÊN");
+        btn_NhanVien.setFocusable(false);
+        btn_NhanVien.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_NhanVien.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_NhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NhanVienActionPerformed(evt);
+            }
+        });
 
-        jButton8.setBackground(new java.awt.Color(0, 153, 153));
-        jButton8.setText("ĐĂNG XUẤT");
+        btn_SanPham.setBackground(new java.awt.Color(0, 153, 153));
+        btn_SanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Full basket.png"))); // NOI18N
+        btn_SanPham.setText("QUẢN LÝ SAN PHAM");
+        btn_SanPham.setFocusable(false);
+        btn_SanPham.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_SanPham.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_SanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SanPhamActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        btn_loaiSanPham.setBackground(new java.awt.Color(0, 153, 153));
+        btn_loaiSanPham.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Full basket.png"))); // NOI18N
+        btn_loaiSanPham.setText("LOẠI SẢN PHẨM");
+        btn_loaiSanPham.setFocusable(false);
+        btn_loaiSanPham.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_loaiSanPham.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_loaiSanPham.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loaiSanPhamActionPerformed(evt);
+            }
+        });
+
+        btn_HoaDon.setBackground(new java.awt.Color(0, 153, 153));
+        btn_HoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Cash register.png"))); // NOI18N
+        btn_HoaDon.setText("HÓA ĐƠN");
+        btn_HoaDon.setFocusable(false);
+        btn_HoaDon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_HoaDon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_HoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HoaDonActionPerformed(evt);
+            }
+        });
+
+        btn_doanhThu1.setBackground(new java.awt.Color(0, 153, 153));
+        btn_doanhThu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Diagram.png"))); // NOI18N
+        btn_doanhThu1.setText("DOANH THU");
+        btn_doanhThu1.setFocusable(false);
+        btn_doanhThu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_doanhThu1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_doanhThu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_doanhThu1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout lbl_dongHoLayout = new javax.swing.GroupLayout(lbl_dongHo);
+        lbl_dongHo.setLayout(lbl_dongHoLayout);
+        lbl_dongHoLayout.setHorizontalGroup(
+            lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jDesktopPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbl_dongHoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton8)
+                .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23))
+            .addGroup(lbl_dongHoLayout.createSequentialGroup()
+                .addGroup(lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lbl_dongHoLayout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lbl_dongHoLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(btn_NhanVien)
+                        .addGap(37, 37, 37)
+                        .addComponent(btn_SanPham)
+                        .addGap(43, 43, 43)
+                        .addComponent(btn_loaiSanPham)
+                        .addGap(39, 39, 39)
+                        .addComponent(btn_HoaDon)
+                        .addGap(53, 53, 53)
+                        .addComponent(btn_doanhThu1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        lbl_dongHoLayout.setVerticalGroup(
+            lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lbl_dongHoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lbl_dongHoLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lbl_dongHoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_doanhThu1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_NhanVien, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_SanPham, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_loaiSanPham, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_HoaDon, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(lbl_dongHoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_logout))
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 324, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jMenu1.setText("Hệ thống");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 950, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Key.png"))); // NOI18N
+        jMenu3.setText("Đăng nhập");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu3);
+
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Log out.png"))); // NOI18N
+        jMenu4.setText("Đăng xuất");
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu4);
+
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Refresh.png"))); // NOI18N
+        jMenu5.setText("Đổi mật khẩu");
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenu5);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Quản lý");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbl_dongHo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lbl_dongHo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_HoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_HoaDonActionPerformed
+        // TODO add your handling code here:
+        openHoaDon();
+    }//GEN-LAST:event_btn_HoaDonActionPerformed
+
+    private void btn_NhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NhanVienActionPerformed
+        // TODO add your handling code here:
+        openQLNhanVien();
+    }//GEN-LAST:event_btn_NhanVienActionPerformed
+
+    private void btn_SanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SanPhamActionPerformed
+        // TODO add your handling code here:
+        openSanPham();
+    }//GEN-LAST:event_btn_SanPhamActionPerformed
+
+    private void btn_loaiSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loaiSanPhamActionPerformed
+        // TODO add your handling code here:
+        openLoaiSanPham();
+    }//GEN-LAST:event_btn_loaiSanPhamActionPerformed
+
+    private void btn_doanhThu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doanhThu1ActionPerformed
+        // TODO add your handling code here:
+        openDoanhThu();
+    }//GEN-LAST:event_btn_doanhThu1ActionPerformed
+
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
+        // TODO add your handling code here:
+        logoff();
+        this.dispose();
+    }//GEN-LAST:event_btn_logoutActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        // TODO add your handling code here:
+        openLogin();
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+        // TODO add your handling code here:
+        logoff();
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+        // TODO add your handling code here:
+        if (Auth.isLogin()) {
+            new DoiMatKhauFormJDialog(this, true).setVisible(true);
+        } else {
+            dialogHelper.alert(this, "Vui lòng đăng nhập trước khi đổi mật khẩu");
+        }
+    }//GEN-LAST:event_jMenu5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,25 +426,23 @@ public class FormChinh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton btn_HoaDon;
+    private javax.swing.JButton btn_NhanVien;
+    private javax.swing.JButton btn_SanPham;
+    private javax.swing.JButton btn_doanhThu1;
+    private javax.swing.JButton btn_loaiSanPham;
+    private javax.swing.JButton btn_logout;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator4;
-    private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JPanel lbl_dongHo;
     // End of variables declaration//GEN-END:variables
 }

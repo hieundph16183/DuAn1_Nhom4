@@ -16,6 +16,11 @@ public class FormDoanhThu extends javax.swing.JFrame {
      */
     public FormDoanhThu() {
         initComponents();
+        setLocationRelativeTo(null);
+    }
+    
+    public void init(){
+    
     }
 
     /**

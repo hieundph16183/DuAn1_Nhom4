@@ -21,6 +21,7 @@ public class FormHoaDon extends javax.swing.JFrame {
      */
     public FormHoaDon() {
         initComponents();
+        setLocationRelativeTo(null);
         
     }
     
