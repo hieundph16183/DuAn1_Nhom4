@@ -20,9 +20,9 @@ public class TaiKhoanDAO {
     public TaiKhoan readFromResultSet(ResultSet rs) throws SQLException{
         TaiKhoan model=new TaiKhoan();
         model.setMaNV(rs.getString("MaNV"));
+        model.setTenNhanVien(rs.getString("TenNV"));
         model.setMatKhau(rs.getString("MatKhau"));
-        model.setTenTaiKhoan(rs.getString("TenTaiKhoan"));
-        model.setVaiTro(rs.getBoolean("VaiTro"));
+        model.setVaiTro(rs.getBoolean("VaiTro"));   
         return model;
     }
     
@@ -50,26 +50,36 @@ public class TaiKhoanDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(TaiKhoan entity) {
-        String sql="INSERT INTO TaiKhoan (TenTaiKhoan, MatKhau, VaiTro,MaNV) VALUES (?, ?, ?, ?)";
+        String sql="INSERT INTO TaiKhoan (MaNV,TenNV, MatKhau, VaiTro) VALUES (?, ?, ?, ?)";
         jdbcHelper.executeUpdate(sql,
-                entity.getTenTaiKhoan(),
+                entity.getMaNV(),
+                entity.getTenNhanVien(),
                 entity.getMatKhau(),
-                entity.isVaiTro(),
-                entity.getMaNV());
+                entity.isVaiTro());
     }
 
     /*
      * Cập nhật thực thể vào CSDL
      * @param entity là thực thể chứa thông tin bản ghi cần cập nhật
      */
-    public void update(TaiKhoan entity) {
-        String sql="UPDATE NhanVien SET MaNV=?, MatKhau=?, VaiTro= ? MaNV WHERE TenTaiKhoan=?";
+    
+    
+     public void update(TaiKhoan entity) {
+        String sql="UPDATE NhanVien SET  TenNV=?, MatKhau=?, VaiTro=? WHERE MaNV=?";
         jdbcHelper.executeUpdate(sql,
-                entity.getMaNV(),
+                entity.getTenNhanVien(),
                 entity.getMatKhau(),
                 entity.isVaiTro(),
-                entity.getTenTaiKhoan());
+                entity.getMaNV());
     }
+     
+     public void updatepass(TaiKhoan tk){
+         String sql ="update TaiKhoan set MatKhau = ? where MaNV=?";
+         jdbcHelper.executeUpdate(sql, 
+                 tk.getMatKhau(),
+                 tk.getMaNV()
+            );
+     }
 
     /*
      * Xóa bản ghi khỏi CSDL
@@ -80,7 +90,7 @@ public class TaiKhoanDAO {
         jdbcHelper.executeUpdate(sql, maNV);
     }
 
-    /**
+    /*
      * Truy vấn tất cả các các thực thể
      * @return danh sách các thực thể
      */
@@ -95,7 +105,7 @@ public class TaiKhoanDAO {
      * @return thực thể chứa thông tin của bản ghi
      */
     public TaiKhoan findById(String id) {
-        String sql="SELECT * FROM TaiKhoan WHERE TenTaiKhoan=?";
+        String sql="SELECT * FROM TaiKhoan WHERE MaNV=?";
         List<TaiKhoan> list=select(sql, id);
         return list.size()>0?list.get(0):null;               //có thể trả về là null
     }

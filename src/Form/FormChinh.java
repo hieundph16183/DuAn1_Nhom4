@@ -142,11 +142,11 @@ public class FormChinh extends javax.swing.JFrame {
         btn_doanhThu1 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        mnhethong = new javax.swing.JMenu();
+        mnidangnhap = new javax.swing.JMenuItem();
+        mnidangxuat = new javax.swing.JMenuItem();
+        mnidoimk = new javax.swing.JMenuItem();
+        mnquanly = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -307,39 +307,45 @@ public class FormChinh extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jMenu1.setText("Hệ thống");
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
 
-        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Key.png"))); // NOI18N
-        jMenu3.setText("Đăng nhập");
-        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+        mnhethong.setText("Hệ thống");
+
+        mnidangnhap.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnidangnhap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Key.png"))); // NOI18N
+        mnidangnhap.setText("Đăng nhập");
+        mnidangnhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu3ActionPerformed(evt);
+                mnidangnhapActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenu3);
+        mnhethong.add(mnidangnhap);
 
-        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Log out.png"))); // NOI18N
-        jMenu4.setText("Đăng xuất");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+        mnidangxuat.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnidangxuat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Exit.png"))); // NOI18N
+        mnidangxuat.setText("Đăng xuất");
+        mnidangxuat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
+                mnidangxuatActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenu4);
+        mnhethong.add(mnidangxuat);
 
-        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Refresh.png"))); // NOI18N
-        jMenu5.setText("Đổi mật khẩu");
-        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+        mnidoimk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Refresh.png"))); // NOI18N
+        mnidoimk.setText("Đổi mật khẩu");
+        mnidoimk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu5ActionPerformed(evt);
+                mnidoimkActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenu5);
+        mnhethong.add(mnidoimk);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(mnhethong);
 
-        jMenu2.setText("Quản lý");
-        jMenuBar1.add(jMenu2);
+        mnquanly.setText("Quản lý");
+        jMenuBar1.add(mnquanly);
 
         setJMenuBar(jMenuBar1);
 
@@ -387,24 +393,29 @@ public class FormChinh extends javax.swing.JFrame {
         logoff();
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
-        // TODO add your handling code here:
-        openLogin();
-    }//GEN-LAST:event_jMenu3ActionPerformed
+    private void mnidangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnidangnhapActionPerformed
+        if (Auth.user != null) {
+            dialogHelper.alert(this, "User: " + Auth.user.getMaNV()+ "\n bạn đang trong trạng thái đăng nhập");
+            return;
+        } else {
 
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:
-        logoff();
-    }//GEN-LAST:event_jMenu4ActionPerformed
+            openLogin();
+          
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_mnidangnhapActionPerformed
 
-    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+    private void mnidangxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnidangxuatActionPerformed
+        logoff();        // TODO add your handling code here:
+    }//GEN-LAST:event_mnidangxuatActionPerformed
+
+    private void mnidoimkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnidoimkActionPerformed
         // TODO add your handling code here:
         if (Auth.isLogin()) {
             new DoiMatKhauFormJDialog(this, true).setVisible(true);
         } else {
             dialogHelper.alert(this, "Vui lòng đăng nhập trước khi đổi mật khẩu");
         }
-    }//GEN-LAST:event_jMenu5ActionPerformed
+    }//GEN-LAST:event_mnidoimkActionPerformed
 
     /**
      * @param args the command line arguments
@@ -450,16 +461,16 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JButton btn_loaiSanPham;
     private javax.swing.JButton btn_logout;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JPanel lbl_dongHo;
     private javax.swing.JLabel lbldongho;
+    private javax.swing.JMenu mnhethong;
+    private javax.swing.JMenuItem mnidangnhap;
+    private javax.swing.JMenuItem mnidangxuat;
+    private javax.swing.JMenuItem mnidoimk;
+    private javax.swing.JMenu mnquanly;
     // End of variables declaration//GEN-END:variables
 }

@@ -26,18 +26,18 @@ public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
         init();
     }
     public void init(){
-      
+     txt_maNV.setText(Auth.user.getMaNV());
     
     }
     TaiKhoanDAO dao = new TaiKhoanDAO();
     
     private void doiMK(){
-        String maNV = txtMaNV.getText();
+        String maNV = txt_maNV.getText();
         String matKhau=new String(txtMatKhau.getPassword());
         String matKhauMoi=new String(txtMatKhauMoi.getPassword());
         String xacNhanMKM=new String(txtXacNhanMKM.getPassword());
         
-        if(!maNV.equalsIgnoreCase(Auth.user.getTenTaiKhoan())){
+        if(!maNV.equalsIgnoreCase(Auth.user.getMaNV())){
             MsgBox.alert(this, "Sai teen dang nhap");
         }else if(!matKhau.equals(Auth.user.getMatKhau())){
              MsgBox.alert(this, "Sai mat khau ");
@@ -45,7 +45,7 @@ public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
              MsgBox.alert(this, "Xac nhan mk chua dung");
         }else{
             Auth.user.setMatKhau(matKhauMoi);
-            dao.update(Auth.user);
+            dao.updatepass(Auth.user);
              MsgBox.alert(this, "Doi mk thanh cong");
         }
         
@@ -72,7 +72,7 @@ public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         txtXacNhanMKM = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
-        txtMaNV = new javax.swing.JTextField();
+        txt_maNV = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -80,7 +80,7 @@ public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Mã NV");
+        jLabel3.setText("Ma NV");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -127,7 +127,7 @@ public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                    .addComponent(txtMaNV))))
+                                    .addComponent(txt_maNV))))
                         .addGap(118, 118, 118))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,7 +138,7 @@ public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_maNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -277,9 +277,9 @@ public class DoiMatKhauFormJDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtMaNV;
     private javax.swing.JPasswordField txtMatKhau;
     private javax.swing.JPasswordField txtMatKhauMoi;
     private javax.swing.JPasswordField txtXacNhanMKM;
+    private javax.swing.JTextField txt_maNV;
     // End of variables declaration//GEN-END:variables
 }

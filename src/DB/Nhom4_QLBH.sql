@@ -26,10 +26,10 @@ create table NhanVien
 go
 
 create table TaiKhoan(
-	TenTaiKhoan varchar(20) not null primary key,
+	MaNV varchar(10),
+	TenNV nvarchar(40), 
 	MatKhau nvarchar(30),
 	VaiTro bit,
-	MaNV varchar(10),
 	foreign key (MaNV) references NhanVien (MaNV)
 )
 go
@@ -91,13 +91,13 @@ insert into NhanVien values('NV01',N'Nguyễn Huy Hiếu',N'0432434342',N'Hà N�
 insert into NhanVien values('NV02',N'Nguyễn Huy Nam',N'0998745442',N'Hải Phòng','hieuha12@gamil.com',null)
 insert into NhanVien values('NV03',N'Nguyễn Thị Hương',N'0353534442',N'Hà Nam','hieuha12@gamil.com',null)
 insert into NhanVien values('NV04',N'Vũ Thị Huyền',N'0756434368',N'Hải Dương','hieuha12@gamil.com',null)
-insert into NhanVien values('NV05',N'Nguyễn Huy Hoàng',N'0454927343',N'Hà Nội','hieuha12@gamil.com',null)
+insert into NhanVien values('NV04',N'Nguyễn Huy Hoàng',N'0454927343',N'Hà Nội','hieuha12@gamil.com',null)
 
-insert into TaiKhoan values('hieund1','123456',0,'NV01')
-insert into TaiKhoan values('hieund2','123456',0,'NV02')
-insert into TaiKhoan values('hieund3','123456',0,'NV03')
-insert into TaiKhoan values('hieund4','123456',0,'NV04')
-insert into TaiKhoan values('hieund5','123456',1,'NV05')
+insert into TaiKhoan values('NV01',N'Nguyễn Huy Hiếu','123456',0)
+insert into TaiKhoan values('NV02',N'Nguyễn Huy Nam','123456',0)
+insert into TaiKhoan values('NV03',N'Nguyễn Thị Hương','123456',0)
+insert into TaiKhoan values('NV04',N'Vũ Thị Huyền','123456',0)
+insert into TaiKhoan values('NV04',N'Nguyễn Huy Hoàng','123456',1)
 
 insert into KhachHang values('KH01',N'Nguyễn Văn Nam',N'035476555',N'Hà Nội')
 insert into KhachHang values('KH02',N'Kiều Văn Hoàng',N'093453434',N'Hà Nội')
