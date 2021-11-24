@@ -10,24 +10,18 @@ package Model;
  * @author Hai
  */
 public class TaiKhoan {
-    private String TenTaiKhoan,MatKhau,VaiTro,MaNV;
+    private String tenNhanVien,MatKhau,MaNV;
+    private boolean vaiTro=false;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(String TenTaiKhoan, String MatKhau, String VaiTro, String MaNV) {
-        this.TenTaiKhoan = TenTaiKhoan;
-        this.MatKhau = MatKhau;
-        this.VaiTro = VaiTro;
-        this.MaNV = MaNV;
+    public String getTenNhanVien() {
+        return tenNhanVien;
     }
 
-    public String getTenTaiKhoan() {
-        return TenTaiKhoan;
-    }
-
-    public void setTenTaiKhoan(String TenTaiKhoan) {
-        this.TenTaiKhoan = TenTaiKhoan;
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
     }
 
     public String getMatKhau() {
@@ -38,14 +32,6 @@ public class TaiKhoan {
         this.MatKhau = MatKhau;
     }
 
-    public String getVaiTro() {
-        return VaiTro;
-    }
-
-    public void setVaiTro(String VaiTro) {
-        this.VaiTro = VaiTro;
-    }
-
     public String getMaNV() {
         return MaNV;
     }
@@ -53,6 +39,17 @@ public class TaiKhoan {
     public void setMaNV(String MaNV) {
         this.MaNV = MaNV;
     }
+
+    public boolean isVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(boolean vaiTro) {
+        this.vaiTro = vaiTro;
+    }
+
+   
+    
     
     
 }

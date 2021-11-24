@@ -15,12 +15,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Hai
  */
-public class FormHoaDonBanHang extends javax.swing.JFrame {
+public class FormHoaDon extends javax.swing.JFrame {
     /**
      * Creates new form FormHoaDonBanHang
      */
-    public FormHoaDonBanHang() {
+    public FormHoaDon() {
         initComponents();
+        setLocationRelativeTo(null);
         
     }
     
@@ -90,11 +91,11 @@ public class FormHoaDonBanHang extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã Hóa Đơn", "Ngày Hóa Đơn", "Tên Nhân Viên", "Tên Khách Hàng"
+                "STT", "Mã Hóa Đơn", "MaSP", "SoLuong", "MaKH", "ThoiGianLap", "MaNV", "TongTien"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -214,20 +215,21 @@ public class FormHoaDonBanHang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormHoaDonBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormHoaDonBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormHoaDonBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormHoaDonBanHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormHoaDon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormHoaDonBanHang().setVisible(true);
+                new FormHoaDon().setVisible(true);
             }
         });
     }
