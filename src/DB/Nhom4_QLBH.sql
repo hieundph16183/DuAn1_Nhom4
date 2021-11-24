@@ -77,15 +77,9 @@ create table HoaDon
 	primary key (STT),
 	foreign key (MaKH)  references KhachHang(MaKH),
 	foreign key (MaNV)  references NhanVien(MaNV),
+	foreign key (MaSanPham)  references SanPham(MaSanPham)
 )
 go
-
-
-
-
-
-
-
 
 insert into NhanVien values('NV01',N'Nguyễn Huy Hiếu',N'0432434342',N'Hà Nội','hieuha12@gamil.com',null)
 insert into NhanVien values('NV02',N'Nguyễn Huy Nam',N'0998745442',N'Hải Phòng','hieuha12@gamil.com',null)
@@ -111,7 +105,7 @@ insert into LoaiSanPham values('TS4',N'Nước Ngọt')
 
 insert into SanPham values('SP1',N'Trà Chanh Nha Đam',10000,null,'TC1')
 insert into SanPham values('SP2',N'Trà Chanh Thường',10000,null,'TC1')
-insert into SanPham values('SP3',N'Trà Chanh Nho',20000,null,'TS1')
+insert into SanPham values('SP3',N'Trà Chanh Nho',20000,null,'TS2')
 insert into SanPham values('SP4',N'Trà sữa chân châu',50000,null,'TS2')
 insert into SanPham values('SP5',N'Trà sữa nha dam',50000,null,'TS2')
 insert into SanPham values('SP6',N'Cà phê den',20000,null,'TS3')
@@ -134,5 +128,3 @@ select * from SanPham
 select * from KhachHang
 select * from LoaiSanPham
 select * from HoaDon
-
-
