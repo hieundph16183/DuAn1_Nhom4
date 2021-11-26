@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package helper;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Statement;
 
 /**
  *
@@ -31,6 +31,7 @@ public class jdbcHelper {
             Logger.getLogger(jdbcHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   
     
     //nạp truyền giá trị đối số vào prepareStatement
     //có thể statment không có đối số
@@ -90,4 +91,7 @@ public class jdbcHelper {
             throw new RuntimeException(ex);         //throw các lỗi khi chạy CT, VD không có return khi try bị lỗi
         }
     }
+    
+    
+    
 }

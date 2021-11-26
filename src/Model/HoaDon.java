@@ -13,20 +13,18 @@ import java.util.Date;
 public class HoaDon {
     private int STT;
     private String maHoaDon;
-    private String maSanPham;
     private int soLuong;
     private String maKhachHang;
     private Date thoiGianLap;
     private String maNhanVien;
-    private String tongTien;
+    private float tongTien;
 
     public HoaDon() {
     }
 
-    public HoaDon(int STT, String maHoaDon, String maSanPham, int soLuong, String maKhachHang, Date thoiGianLap, String maNhanVien, String tongTien) {
+    public HoaDon(int STT, String maHoaDon, int soLuong, String maKhachHang, Date thoiGianLap, String maNhanVien, float tongTien) {
         this.STT = STT;
         this.maHoaDon = maHoaDon;
-        this.maSanPham = maSanPham;
         this.soLuong = soLuong;
         this.maKhachHang = maKhachHang;
         this.thoiGianLap = thoiGianLap;
@@ -34,6 +32,8 @@ public class HoaDon {
         this.tongTien = tongTien;
     }
 
+    
+    
     public int getSTT() {
         return STT;
     }
@@ -50,14 +50,6 @@ public class HoaDon {
         this.maHoaDon = maHoaDon;
     }
 
-    public String getMaSanPham() {
-        return maSanPham;
-    }
-
-    public void setMaSanPham(String maSanPham) {
-        this.maSanPham = maSanPham;
-    }
-
     public int getSoLuong() {
         return soLuong;
     }
@@ -65,6 +57,8 @@ public class HoaDon {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
+
+ 
 
     public String getMaKhachHang() {
         return maKhachHang;
@@ -90,13 +84,15 @@ public class HoaDon {
         this.maNhanVien = maNhanVien;
     }
 
-    public String getTongTien() {
+    public float getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(String tongTien) {
+    public void setTongTien(float tongTien) {
         this.tongTien = tongTien;
     }
+
+   
 
     
     
