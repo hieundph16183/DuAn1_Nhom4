@@ -51,17 +51,19 @@ public class HoaDonDAO {
      * @param entity là thực thể chứa thông tin bản ghi mới
      */
     public void insert(HoaDon hd) {
-        String sql="insert into HoaDon(MaHD,ThoiGianLap,MaNV,MaKH) VALUES (?, ?, ?, ?)";
+        String sql="insert into HoaDon(MaHD,SoLuong,MaKH,ThoiGianLap,MaNV,TongTien) VALUES (?, ?, ?, ?,?,?)";
          jdbcHelper.executeUpdate(sql,
            hd.getMaHoaDon(),
+           hd.getSoLuong(),
+           hd.getMaKhachHang(),
            hd.getThoiGianLap(),
            hd.getMaNhanVien(),
-           hd.getMaKhachHang());
+           hd.getTongTien());
     }
 
     
     public void update(HoaDon hd) {
-        String sql="UPDATE NguoiHoc SET MaHD=?, ThoiGianLap=?, MaNV=?, MaKH=?";
+        String sql="UPDATE NguoiHoc SET MaHD=?,SoLuong = ?,MaKH=?, ThoiGianLap=?, MaNV=?,TongTien =? ";
         jdbcHelper.executeUpdate(sql,            
                 hd.getMaHoaDon(),
                 hd.getThoiGianLap(),

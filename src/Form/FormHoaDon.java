@@ -8,9 +8,12 @@ package Form;
 import Dao.HoaDonDAO;
 import Model.HoaDon;
 import helper.dialogHelper;
+import helper.shareHelper;
 import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import helper.Auth;
+import helper.dateHelper;
 /**
  *
  * @author Hai
@@ -52,7 +55,57 @@ public class FormHoaDon extends javax.swing.JFrame {
         }
     }
     
-   
+    void insert() {
+        HoaDon model = getModel();   //lấy thông tin trên form gán cho đt nguoiHoc
+        try {
+            dao.insert(model);    //thêm bản ghi mới vào CSDL theo tt từ nguoiHoc
+            this.load();            //đổ thông tin mới vào bảng
+            dialogHelper.alert(this, "Thêm mới thành công!");
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Thêm mới thất bại!");
+        }
+    }
+
+    //lấy thông tin trên form
+    //để chỉnh sửa nguoiHoc trong CSDL theo maNH
+    void update() {
+        HoaDon model = getModel(); //lấy thông tin form gán cho đt nguoiHoc
+        try {
+            dao.update(model);   //chỉnh sửa bản ghi theo tt từ nguoiHoc 
+            this.load();         //đổ tt mới từ CSDL vào bảng
+            dialogHelper.alert(this, "Cập nhật thành công!");
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Cập nhật thất bại!");
+            e.printStackTrace();
+        }
+    }
+
+    //xóa bản ghi khỏi CSDL theo maNH lấy trên form
+    //xóa trằng form và chuyển sang insertable
+    void delete() {
+        if (dialogHelper.confirm(this, "Bạn thực sự muốn xóa người học này?")) {
+            String manh = txt_maHD.getText();
+            try {
+                dao.delete(manh);
+                this.load();
+            
+                dialogHelper.alert(this, "Xóa thành công!");
+            } catch (HeadlessException e) {
+                dialogHelper.alert(this, "Xóa thất bại!");
+            }
+        }
+    }
+    
+    HoaDon getModel() {
+        HoaDon model = new HoaDon();
+        model.setMaHoaDon(txt_maHD.getText());
+        model.setSoLuong(Integer.parseInt(txt_soLuong.getText()));
+        model.setMaNhanVien(txt_maNV.getText());
+        model.setThoiGianLap(dateHelper.now());     //ngày đăng kí luôn là ngày hôm nay dù có sửa trên form
+        model.setMaKhachHang(txt_maKhachHang.getText());
+        model.setMaNhanVien(Auth.user.getMaNV());
+        return model;
+    }
 
 
     /**
@@ -76,16 +129,16 @@ public class FormHoaDon extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txt_maHD = new javax.swing.JTextField();
+        txt_maKhachHang = new javax.swing.JTextField();
+        txt_ngayLapHoaDon = new javax.swing.JTextField();
+        txt_maNV = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txt_timKiem = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        txt_soLuong = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txt_tongTien = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
 
         jButton3.setBackground(new java.awt.Color(0, 153, 153));
@@ -103,10 +156,20 @@ public class FormHoaDon extends javax.swing.JFrame {
         jButton4.setBackground(new java.awt.Color(0, 153, 153));
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Create.png"))); // NOI18N
         jButton4.setText("Thêm");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(0, 153, 153));
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Delete.png"))); // NOI18N
         jButton7.setText("Xóa");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 153, 153));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Save.png"))); // NOI18N
@@ -199,12 +262,12 @@ public class FormHoaDon extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txt_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_maHD, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_ngayLapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_maNV, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txt_tongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -219,26 +282,26 @@ public class FormHoaDon extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_maHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_maKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_ngayLapHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_maNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,6 +316,19 @@ public class FormHoaDon extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        if (Auth.user.isVaiTro()) {
+            delete();
+        } else {
+            dialogHelper.alert(this, "Chỉ quản lý mới được phép xóa");
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,13 +382,13 @@ public class FormHoaDon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTable tb_bang;
+    private javax.swing.JTextField txt_maHD;
+    private javax.swing.JTextField txt_maKhachHang;
+    private javax.swing.JTextField txt_maNV;
+    private javax.swing.JTextField txt_ngayLapHoaDon;
+    private javax.swing.JTextField txt_soLuong;
     private javax.swing.JTextField txt_timKiem;
+    private javax.swing.JTextField txt_tongTien;
     // End of variables declaration//GEN-END:variables
 }
