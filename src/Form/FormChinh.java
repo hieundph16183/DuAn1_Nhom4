@@ -398,7 +398,6 @@ public class FormChinh extends javax.swing.JFrame {
             dialogHelper.alert(this, "User: " + Auth.user.getMaNV()+ "\n bạn đang trong trạng thái đăng nhập");
             return;
         } else {
-
             openLogin();
           
         }        // TODO add your handling code here:

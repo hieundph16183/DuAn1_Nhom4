@@ -68,7 +68,6 @@ create table HoaDon
 (
 	STT int not null identity(1,1),
 	MaHD varchar(10) not null,
-	MaSanPham varchar(10),
 	SoLuong int,  
 	MaKH varchar(10),
 	ThoiGianLap datetime,
@@ -114,10 +113,10 @@ insert into SanPham values('SP8',N'Coca',10000,null,'TS4')
 insert into SanPham values('SP9',N'Pepsi',10000,null,'TS4')
 
 
-insert into HoaDon values('HD01','SP1',5,'KH01','10-10-2021','NV01',50000.0)
-insert into HoaDon values('HD02','SP2',4,'KH02','11-10-2021','NV02',40000.0)
-insert into HoaDon values('HD03','SP3',3,'KH03','12-10-2021','NV03',60000.0)
-insert into HoaDon values('HD04','SP4',4,'KH04','12-10-2021','NV05',80000)
+insert into HoaDon values('HD01',5,'KH01','10-10-2021','NV01',50000.0)
+insert into HoaDon values('HD02',4,'KH02','11-10-2021','NV02',40000.0)
+insert into HoaDon values('HD03',3,'KH03','12-10-2021','NV03',60000.0)
+insert into HoaDon values('HD04',4,'KH04','12-10-2021','NV05',80000.0)
 
 
 

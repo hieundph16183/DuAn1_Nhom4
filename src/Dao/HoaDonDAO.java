@@ -19,10 +19,13 @@ import java.util.List;
 public class HoaDonDAO {
     private HoaDon readFromResultSet(ResultSet rs) throws SQLException{
 	HoaDon hd =new HoaDon();
+         hd.setSTT(rs.getInt("STT"));
          hd.setMaHoaDon(rs.getString("MaHD"));
+         hd.setSoLuong(rs.getInt("SoLuong"));
+         hd.setMaKhachHang(rs.getString("MaKH"));
          hd.setThoiGianLap(rs.getDate("ThoiGianLap"));
          hd.setMaNhanVien(rs.getString("MaNV"));
-         hd.setMaKhachHang(rs.getString("MaKH"));
+         hd.setTongTien(rs.getFloat("TongTien"));
          return hd;
     }
     private List<HoaDon> select(String sql, Object...args){
@@ -76,13 +79,11 @@ public class HoaDonDAO {
         String sql="SELECT * FROM HoaDon";
         return select(sql);
     }
-
     
-     
      //truy xuất khách hàng theo manv
-     public HoaDon findById(String manh){
-     String sql="SELECT * FROM HoaDon WHERE MaNV=?";
-     List<HoaDon> list = select(sql, manh);
+     public HoaDon findById(String mahd){
+     String sql="SELECT * FROM HoaDon WHERE MaHD=?";
+     List<HoaDon> list = select(sql, mahd);
      return list.size() > 0 ? list.get(0) : null;
      }
     
