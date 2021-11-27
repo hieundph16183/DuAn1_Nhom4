@@ -38,19 +38,6 @@ public class Validate {
     đúng 7 kí tự
     a-z, A-Z, 0-9
      */
-    public static boolean checkMaNH(JTextField txt) {
-        txt.setBackground(white);
-        String id = txt.getText();
-        String rgx = "[a-zA-Z0-9]{7}";
-        if (id.matches(rgx)) {
-            return true;
-        } else {
-            txt.setBackground(pink);
-            dialogHelper.alert(txt.getRootPane(), txt.getName() + " phải có đúng 7 kí tự\nchữ thường, chữ hoa hoặc số");
-            return false;
-        }
-    }
-
    
 
     //pass từ 3-16 kí tự

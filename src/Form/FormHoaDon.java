@@ -14,6 +14,10 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import helper.Auth;
 import helper.dateHelper;
+import Validate.Validate;
+import static java.awt.Color.pink;
+import static java.awt.Color.white;
+import javax.swing.JTextField;
 /**
  *
  * @author Hai
@@ -119,10 +123,10 @@ public class FormHoaDon extends javax.swing.JFrame {
 
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btn_them = new javax.swing.JButton();
+        btn_xoa = new javax.swing.JButton();
+        btn_capnhat = new javax.swing.JButton();
+        btn_lammoi = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_bang = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -153,31 +157,41 @@ public class FormHoaDon extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("HÓA ĐƠN MUA HÀNG");
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 153));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Create.png"))); // NOI18N
-        jButton4.setText("Thêm");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn_them.setBackground(new java.awt.Color(0, 153, 153));
+        btn_them.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Create.png"))); // NOI18N
+        btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn_themActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(0, 153, 153));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Delete.png"))); // NOI18N
-        jButton7.setText("Xóa");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btn_xoa.setBackground(new java.awt.Color(0, 153, 153));
+        btn_xoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Delete.png"))); // NOI18N
+        btn_xoa.setText("Xóa");
+        btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btn_xoaActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 153));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Save.png"))); // NOI18N
-        jButton1.setText("Cập Nhật");
+        btn_capnhat.setBackground(new java.awt.Color(0, 153, 153));
+        btn_capnhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Save.png"))); // NOI18N
+        btn_capnhat.setText("Cập Nhật");
+        btn_capnhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_capnhatActionPerformed(evt);
+            }
+        });
 
-        jButton9.setBackground(new java.awt.Color(0, 153, 153));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Refresh.png"))); // NOI18N
-        jButton9.setText("Làm Mới");
+        btn_lammoi.setBackground(new java.awt.Color(0, 153, 153));
+        btn_lammoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageIcon/Refresh.png"))); // NOI18N
+        btn_lammoi.setText("Làm Mới");
+        btn_lammoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_lammoiActionPerformed(evt);
+            }
+        });
 
         tb_bang.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tb_bang.setModel(new javax.swing.table.DefaultTableModel(
@@ -194,6 +208,11 @@ public class FormHoaDon extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_bang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_bangMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tb_bang);
@@ -236,13 +255,13 @@ public class FormHoaDon extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_them, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(61, 61, 61)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_xoa, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_capnhat, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton9)
+                        .addComponent(btn_lammoi)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,10 +324,10 @@ public class FormHoaDon extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton7)
-                    .addComponent(jButton1)
-                    .addComponent(jButton9))
+                    .addComponent(btn_them)
+                    .addComponent(btn_xoa)
+                    .addComponent(btn_capnhat)
+                    .addComponent(btn_lammoi))
                 .addGap(47, 47, 47)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
@@ -317,18 +336,88 @@ public class FormHoaDon extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
         if (Auth.user.isVaiTro()) {
             delete();
         } else {
             dialogHelper.alert(this, "Chỉ quản lý mới được phép xóa");
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btn_xoaActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        if (Validate.checkNullText(txt_maHD)
+                && Validate.checkNullText(txt_maKhachHang)
+                && Validate.checkNullText(txt_maNV)) {
+            
+                if (checkTrungMa(txt_maHD)) {
+                    insert();
+                }
+            
+        }
+    }//GEN-LAST:event_btn_themActionPerformed
+    
+    public boolean checkTrungMa(JTextField txt) {
+        if (dao.findById(txt.getText()) == null) {
+            return true;
+        } else {
+            txt.setBackground(pink);
+            dialogHelper.alert(this,"Mã đã bị tồn tại.");
+            return false;
+        }
+    }
+    
+    void setModel(HoaDon model) {
+        txt_maHD.setText(model.getMaHoaDon());
+        txt_soLuong.setText(String.valueOf(model.getSoLuong()));
+        txt_maKhachHang.setText(model.getMaKhachHang());
+        txt_ngayLapHoaDon.setText(String.valueOf(model.getThoiGianLap()));
+        txt_maNV.setText(model.getMaNhanVien());
+        txt_tongTien.setText(String.valueOf(model.getTongTien()));
+    }
+    
+    void clear() {
+        txt_maHD.setText("");
+        txt_soLuong.setText("");
+        txt_maNV.setText("");
+        txt_ngayLapHoaDon.setText("");
+          //ngày đăng kí luôn là ngày hôm nay dù có sửa trên form
+        txt_maKhachHang.setText("");
+      txt_tongTien.setText("");
+    }
+    
+     void edit() {
+        try {
+            String macd = (String) tb_bang.getValueAt(this.index, 0);
+            HoaDon model = dao.findById(macd);
+            if (model != null) {
+                this.setModel(model);
+            }
+        } catch (Exception e) {
+            dialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    private void btn_capnhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatActionPerformed
+        // TODO add your handling code here:
+            if(Validate.checkNullText(txt_soLuong)
+                    &&Validate.checkNullText(txt_maKhachHang)
+                    &&Validate.checkNullText(txt_soLuong)
+                    &&Validate.checkNullText(txt_tongTien)
+                    &&Validate.checkNullText(txt_ngayLapHoaDon)){
+                update();
+            }
+    }//GEN-LAST:event_btn_capnhatActionPerformed
+
+    private void tb_bangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_bangMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tb_bangMouseClicked
+
+    private void btn_lammoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lammoiActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btn_lammoiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,12 +456,12 @@ public class FormHoaDon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_capnhat;
+    private javax.swing.JButton btn_lammoi;
+    private javax.swing.JButton btn_them;
+    private javax.swing.JButton btn_xoa;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
